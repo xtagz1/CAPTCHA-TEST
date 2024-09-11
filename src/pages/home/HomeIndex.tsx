@@ -1,9 +1,10 @@
+import MainBoxLayout from "@/components/MainBoxLayout";
+
 const HomeIndex = () => {
 	return (
-		<section className="grid grid-cols-1  gap-20 py-20">
-			{/* <Toaster position="top-center" richColors /> */}
-            <div>home</div>
-		</section>
+		<div className="border flex items-center justify-center h-[100dvh]">
+			<MainBoxLayout/>
+		</div>
 	);
 };
 

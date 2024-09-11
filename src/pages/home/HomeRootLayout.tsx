@@ -8,7 +8,7 @@ const HomeRootLayout = () => {
 	return (
 		<div className="dark:bg-neutral-950 dark:text-white">
             {locationIsHome}
-			<div className="border container mx-auto min-h-screen">
+			<div className="container mx-auto min-h-screen">
 				{" "}
 				<Outlet />
 			</div>
