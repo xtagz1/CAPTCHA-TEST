@@ -1,5 +1,7 @@
 import { useBoxStore } from "@/stores/box-store";
-import { memo, useEffect, useState } from "react";
+import { useButtonStore } from "@/stores/button-value-store";
+import { memo, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 interface BoxProps {
   toContinue:boolean
@@ -8,6 +10,9 @@ interface BoxProps {
 const CaptchaBox = memo(({toContinue}: BoxProps) => {
 
 const { box, update } = useBoxStore()
+const { updateButton } = useButtonStore()
+const location = useLocation();
+const locationIsHome = location.pathname === "/";
 
 // Generate a random position
 const getRandomPosition = () => {
@@ -22,6 +27,9 @@ const getRandomPosition = () => {
 
 // Update position every second
 useEffect(() => {
+    if (locationIsHome){
+      updateButton({ toContinue:false, text: 'CONTINUE' })
+    }
     let intervalId: NodeJS.Timeout | null = null;
 
     if (!toContinue) {

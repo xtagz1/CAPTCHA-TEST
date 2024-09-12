@@ -1,23 +1,24 @@
-import { useState } from "react";
 import Commandtext from "../common/Commandtext";
 import MainButton from "../common/MainButton";
 import ImageAndSelectionContainer from "./ImageAndSelectionContainer";
 import { useLocation,useNavigate } from "react-router-dom";
+import { useButtonStore } from "@/stores/button-value-store";
 
 export default function ActionContainer() {
   
   const navigate = useNavigate()
   const location = useLocation();
   const locationIsHome = location.pathname === "/";
-  const [toContinue, setToContinue] = useState(false);
 
+  const { buttonValue, updateButton } = useButtonStore()
   // Function to handle button click
   const buttonClick = () => {
     if (locationIsHome) {
-      setToContinue(true);
+      updateButton({ toContinue:true, text: 'VALIDATE' })
       navigate('/validation')  
     } else {
-      alert('clicked!!!!');
+      // alert('clicked!!!!');
+      console.log('chuchu')
     }
   };
 
@@ -25,8 +26,8 @@ export default function ActionContainer() {
   return (
     <div className="h-full flex flex-col items-center justify-center gap-6">
       <Commandtext text={commandText} />
-      <ImageAndSelectionContainer toContinue={toContinue} />
-      <MainButton clickFunction={buttonClick} text={"CONTINUE"} />
+      <ImageAndSelectionContainer toContinue={buttonValue?.toContinue} />
+      <MainButton clickFunction={buttonClick} text={buttonValue?.text} />
     </div>
   );
 }
