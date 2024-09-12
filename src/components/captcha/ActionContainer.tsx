@@ -26,7 +26,7 @@ export default function ActionContainer() {
 
 
   return (
-    <div className="h-full flex flex-col items-center justify-center gap-6">
+    <div className="h-full flex flex-col items-center justify-center gap-4">
       <Commandtext text={command?.text} />
       <ImageAndSelectionContainer />
       <MainButton clickFunction={buttonClick} text={buttonValue?.text} />
