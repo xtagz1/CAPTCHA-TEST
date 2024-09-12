@@ -1,5 +1,6 @@
 import HomeIndex from "@/pages/home/HomeIndex";
 import HomeRootLayout from "@/pages/home/HomeRootLayout";
+import ValidationPage from "@/pages/validation/ValidationPage";
 import { createBrowserRouter } from "react-router-dom";
 
 
@@ -12,6 +13,10 @@ export const Router = createBrowserRouter([
 		),
         children: [
 			{ index: true, element: <HomeIndex /> },
+			{
+				path: "/validation",
+				element: <ValidationPage/>,
+			},
         ]
     },
     {

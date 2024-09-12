@@ -1,4 +1,4 @@
-import MainBoxLayout from "@/components/MainBoxLayout";
+import MainBoxLayout from "@/components/captcha/MainBoxLayout";
 
 const HomeIndex = () => {
 	return (
