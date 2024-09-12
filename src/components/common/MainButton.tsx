@@ -1,7 +1,7 @@
 
 interface ButtonProps {
     clickFunction: () => void;
-    text:any 
+    text:string 
   }
 
 export default function Button({ clickFunction, text }: ButtonProps) {

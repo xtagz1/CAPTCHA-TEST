@@ -1,57 +1,28 @@
-import { useBoxStore } from "@/stores/box-store";
-import { useButtonStore } from "@/stores/button-value-store";
-import { memo, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-
+import useGenerateRandomPosition from "@/hooks/useGenerateRandomPosition";
+import { memo } from "react";
 interface BoxProps {
-  toContinue:boolean
+  
 }
 
-const CaptchaBox = memo(({toContinue}: BoxProps) => {
+const CaptchaBox = memo(({}: BoxProps) => {
+const { box, buttonValue } = useGenerateRandomPosition();
 
-const { box, update } = useBoxStore()
-const { updateButton } = useButtonStore()
-const location = useLocation();
-const locationIsHome = location.pathname === "/";
-
-// Generate a random position
-const getRandomPosition = () => {
-    const maxHeight = 15 * 10; 
-    const maxWidth = 35 * 10; 
-
-    const top = Math.random() * maxHeight; 
-    const left = Math.random() * maxWidth; 
-
-    return { top, left };
-};
-
-// Update position every second
-useEffect(() => {
-    if (locationIsHome){
-      updateButton({ toContinue:false, text: 'CONTINUE' })
-    }
-    let intervalId: NodeJS.Timeout | null = null;
-
-    if (!toContinue) {
-      // Start the interval if toContinue is false
-      intervalId = setInterval(() => {
-        update(getRandomPosition());
-      }, 1000);
-    }
-
-    // Clear interval when toContinue is true or component unmounts
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [toContinue]); 
   
   return (
-    <div
-      className="border-2 border-gray-400 absolute h-[9rem] w-[9rem]"
-      style={{ top: `${box.top}px`, left: `${box.left}px` }}
-    ></div>
+        <div
+          className="border-2 border-white absolute h-[9rem] w-[9rem] grid grid-cols-5 grid-rows-5 gap-0"
+          style={{ top: `${box.top}px`, left: `${box.left}px` }}
+        >
+          { buttonValue?.toContinue && Array.from({ length: 25 }).map((_, index) => (
+            <div
+              key={index}
+              className="border border-white bg-white bg-opacity-40 w-full h-full flex items-senter justify-center"
+            >
+                    {/* Triangle shape */}
+                    <div className="border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[20px] border-b-blue-500 hover:bg-sky-700"></div>
+            </div>
+          ))}
+        </div>
   );
 });
 
