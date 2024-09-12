@@ -1,15 +1,15 @@
 import Commandtext from "../common/Commandtext";
 import MainButton from "../common/MainButton";
 import ImageAndSelectionContainer from "./ImageAndSelectionContainer";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useButtonStore } from "@/stores/buttonValueStore";
 import { useCommandStore } from "@/stores/commandTextStore";
+import { HomeLocationChecker } from "@/hooks/HomeLocationChecker";
 
 export default function ActionContainer() {
   
   const navigate = useNavigate()
-  const location = useLocation();
-  const locationIsHome = location.pathname === "/";
+  const { locationIsHome } = HomeLocationChecker()
   const { buttonValue, updateButton } = useButtonStore()
   const { command  } = useCommandStore()
 

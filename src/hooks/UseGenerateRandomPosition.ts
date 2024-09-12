@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import { useBoxStore } from "@/stores/boxStore";
 import { useButtonStore } from "@/stores/buttonValueStore";
-import { useLocation } from "react-router-dom";
+import { HomeLocationChecker } from "./HomeLocationChecker";
 
 // Custom hook for random position
-const useGenerateRandomPosition = () => {
+const UseGenerateRandomPosition = () => {
   const { box, update } = useBoxStore();
   const { updateButton, buttonValue } = useButtonStore();
-  const location = useLocation();
-  const locationIsHome = location.pathname === "/";
+  const { locationIsHome } = HomeLocationChecker()
 
   const getRandomPosition = () => {
     const maxHeight = 15 * 10;
@@ -43,4 +42,4 @@ const useGenerateRandomPosition = () => {
   return { box, buttonValue };
 };
 
-export default useGenerateRandomPosition;
+export default UseGenerateRandomPosition;
