@@ -11,7 +11,7 @@ const UseGenerateRandomPosition = () => {
 
   const getRandomPosition = () => {
     const maxHeight = 15 * 10;
-    const maxWidth = 35 * 10;
+    const maxWidth = 28 * 10;
 
     const top = Math.random() * maxHeight;
     const left = Math.random() * maxWidth;

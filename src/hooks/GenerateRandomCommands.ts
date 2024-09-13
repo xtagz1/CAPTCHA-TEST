@@ -1,31 +1,50 @@
 import { useButtonStore } from "@/stores/buttonValueStore";
 import { useCommandStore } from "@/stores/commandTextStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const GenerateRandomCommands = () => {
   const { buttonValue } = useButtonStore();
-  const { update, command } = useCommandStore()
+  const { update, command } = useCommandStore();
+  const [lastCommand, setLastCommand] = useState(""); // State to track the last command
 
   const shapes = [
-    "Select Triangle",
-    "Select Circle",
-    "Select Square",
+    {
+      command: "Select Triangle",
+      shape: "triangle"
+    },
+    {
+      command: "Select Circle",
+      shape: "circle"
+    },
+    {
+      command: "Select Square", 
+      shape: "square"
+    },
   ];
 
-
   const generateCommands = () => {
-    const randomIndex = Math.floor(Math.random() * shapes.length);
-    return shapes[randomIndex];
+    let randomIndex;
+    let newCommand;
+
+    // Ensure the new command is different from the last command
+    do {
+      randomIndex = Math.floor(Math.random() * shapes.length);
+      newCommand = shapes[randomIndex]?.command;
+    } while (newCommand === lastCommand);
+
+    // Update the last command
+    setLastCommand(newCommand);
+    return newCommand;
   };
 
   useEffect(() => {
     if (buttonValue?.toContinue === true) {
       const newCommand = generateCommands();
-      update({text: newCommand});
-    }else(
-      update({text: 'Take Selfie'})
-    )
-  }, [buttonValue]); 
+      update({ text: newCommand });
+    } else {
+      update({ text: 'Take Selfie' });
+    }
+  }, [buttonValue]);
 
-  return { command }
-}
+  return { command };
+};
