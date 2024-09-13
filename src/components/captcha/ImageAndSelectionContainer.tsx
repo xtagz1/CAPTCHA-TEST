@@ -10,7 +10,7 @@ export default function ImageAndSelectionContainer({ }: ImageAndSelectionContain
   return (
     <div className="border relative">
       <img
-        className="max-h-[22rem]"
+        className="max-h-[20rem]"
         src="https://res.cloudinary.com/jonixxx/image/upload/v1726092714/selfie-image_cijkdo.jpg"
       />
     <CaptchaBox/>
