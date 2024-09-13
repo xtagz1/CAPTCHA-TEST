@@ -3,7 +3,7 @@ import { useBoxStore } from "@/stores/boxStore";
 import { useButtonStore } from "@/stores/buttonValueStore";
 import { HomeLocationChecker } from "./HomeLocationChecker";
 
-// Custom hook for random position
+// Custom hook for random position of the box
 const UseGenerateRandomPosition = () => {
   const { box, update } = useBoxStore();
   const { updateButton, buttonValue } = useButtonStore();

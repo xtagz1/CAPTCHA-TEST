@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 
 interface Command {
   text: string;
+  shape: string
 }
 
 
@@ -14,7 +15,7 @@ interface CommandStore {
 export const useCommandStore = create<CommandStore>()(
   persist(
     (set) => ({
-      command: { text: 'Take Selfie' }, 
+      command: { text: 'Take Selfie', shape: '' }, 
       update: (command: Command) => set({ command }),
     }),
     {

@@ -2,10 +2,11 @@ import { useButtonStore } from "@/stores/buttonValueStore";
 import { useCommandStore } from "@/stores/commandTextStore";
 import { useEffect, useState } from "react";
 
+// custom hook to generate commands
 export const GenerateRandomCommands = () => {
   const { buttonValue } = useButtonStore();
   const { update, command } = useCommandStore();
-  const [lastCommand, setLastCommand] = useState(""); // State to track the last command
+  const [lastCommand, setLastCommand] = useState(""); 
 
   const shapes = [
     {
@@ -25,24 +26,26 @@ export const GenerateRandomCommands = () => {
   const generateCommands = () => {
     let randomIndex;
     let newCommand;
+    let newShape
 
     // Ensure the new command is different from the last command
     do {
       randomIndex = Math.floor(Math.random() * shapes.length);
       newCommand = shapes[randomIndex]?.command;
+      newShape = shapes[randomIndex]?.shape
     } while (newCommand === lastCommand);
 
     // Update the last command
     setLastCommand(newCommand);
-    return newCommand;
+    return { newCommand,newShape };
   };
 
   useEffect(() => {
     if (buttonValue?.toContinue === true) {
-      const newCommand = generateCommands();
-      update({ text: newCommand });
+      const newObjCommand = generateCommands();
+      update({ text: newObjCommand?.newCommand, shape: newObjCommand?.newShape });
     } else {
-      update({ text: 'Take Selfie' });
+      update({ text: 'Take Selfie', shape: '' }); 
     }
   }, [buttonValue]);
 
