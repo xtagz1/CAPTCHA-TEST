@@ -11,7 +11,7 @@ export default function ActionContainer() {
   const navigate = useNavigate()
   const { locationIsHome } = HomeLocationChecker()
   const { buttonValue, updateButton } = useButtonStore()
-  const { command  } = useCommandStore()
+
 
   // Function to handle button click
   const buttonClick = () => {
@@ -26,8 +26,8 @@ export default function ActionContainer() {
 
 
   return (
-    <div className="h-full flex flex-col items-center justify-center gap-6">
-      <Commandtext text={command?.text} />
+    <div className="h-full flex flex-col items-center  justify-around gap-6">
+      <Commandtext />
       <ImageAndSelectionContainer />
       <MainButton clickFunction={buttonClick} text={buttonValue?.text} />
     </div>

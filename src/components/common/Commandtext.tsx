@@ -1,9 +1,13 @@
+import { GenerateRandomCommands } from "@/hooks/GenerateRandomCommands"
+
 interface CommandtextProps {
-    text:string,
+  
 }
 
-export default function Commandtext({text }: CommandtextProps) {
+export default function Commandtext({ }: CommandtextProps) {
+
+  const { command } = GenerateRandomCommands()
   return (
-    <div className="text-blue-700 text-lg">{text}</div>
+    <div className="text-blue-700 text-lg">{ command?.text }</div>
   )
 }

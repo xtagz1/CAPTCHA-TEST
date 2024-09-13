@@ -2,7 +2,7 @@ import { useButtonStore } from "@/stores/buttonValueStore";
 import { useMemo } from "react";
 
   // Function to generate unique random indices
-  export  const GenerateRandomIndices = () => {
+  export  const GenerateRandomShapesIndices = () => {
 
 const { buttonValue } = useButtonStore()
 

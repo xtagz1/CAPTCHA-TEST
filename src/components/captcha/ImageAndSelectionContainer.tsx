@@ -1,4 +1,4 @@
-import CaptchaBox from "../common/CaptchaBox";
+import CaptchaBox from "./CaptchaBox";
 
 
 interface ImageAndSelectionContainerProps {

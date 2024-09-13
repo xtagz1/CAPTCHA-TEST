@@ -1,15 +1,15 @@
 import UseGenerateRandomPosition from "@/hooks/UseGenerateRandomPosition";
-import { memo, useMemo } from "react";
+import { memo } from "react";
 import Triangle from "../shapes/Triangle";
 import Square from "../shapes/Square";
 import Circle from "../shapes/Circle";
-import { GenerateRandomIndices } from "@/hooks/GenerateRandomIndices";
+import { GenerateRandomShapesIndices } from "@/hooks/GenerateRandomShapesIndices";
 
 interface BoxProps {}
 
 const CaptchaBox = memo(({}: BoxProps) => {
   const { box, buttonValue } = UseGenerateRandomPosition(); 
-  const  {triangleIndices, squareIndices, circleIndices} = GenerateRandomIndices()
+  const  {triangleIndices, squareIndices, circleIndices} = GenerateRandomShapesIndices()
 
   return (
     <div
