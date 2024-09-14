@@ -5,13 +5,25 @@ import { useButtonStore } from "@/stores/buttonValueStore";
 import { HomeLocationChecker } from "@/hooks/HomeLocationChecker";
 import useShapeValidation from "@/hooks/UseShapeValidation";
 import { useNavigate } from "react-router-dom";
+import useSweetAlert from "../common/Sweetalert";
 
 export default function ActionContainer() {
     
   const { locationIsHome } = HomeLocationChecker()
   const { buttonValue, updateButton } = useButtonStore()
   const { validate } = useShapeValidation();
+  const { showAlert } = useSweetAlert();
+  
   const navigate = useNavigate();
+
+  const handleSuccess = () => {
+    navigate('/pass')
+  };
+
+  const handleError = () => {
+    console.log("Error function executed!");
+  };
+
 
   const buttonClick = () => {
     if (locationIsHome) {
@@ -19,10 +31,10 @@ export default function ActionContainer() {
       navigate('/validation');
     } else {
       const result = validate();
-      if(result){
-        alert(true)
-      }else{
-        alert(false)
+      if (result) {
+        showAlert("You Pass the validation", "Congratulations! You successfully passed.", "success", handleSuccess);
+      } else {
+        showAlert("Validation error", "You have tries left", "error", handleSuccess, handleError );
       }
     }
   }; 

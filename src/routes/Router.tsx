@@ -1,5 +1,6 @@
 import HomeIndex from "@/pages/home/HomeIndex";
 import HomeRootLayout from "@/pages/home/HomeRootLayout";
+import ValidationPass from "@/pages/pass/ValidationPass";
 import ValidationPage from "@/pages/validation/ValidationPage";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -18,6 +19,12 @@ export const Router = createBrowserRouter([
 			},
         ]
     },
+	{
+		path: "/pass",
+		element: (
+			<ValidationPass />
+		),
+	},
     {
 		path: "*",
 		element: <div>Not Found</div>,

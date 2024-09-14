@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ShapeIndices } from "@/interface/shapeInterface";
+import { ShapeIndices } from "@/interface/captcha"; 
 
 
 interface ShapeIndicesStore {

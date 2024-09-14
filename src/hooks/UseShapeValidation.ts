@@ -9,6 +9,7 @@ type UseShapeValidation = (
 
 ) => { validate: () => boolean };
 
+// hooks for validating selected shapes
 const useShapeValidation: UseShapeValidation = ( ) => {
     const { shapes } = useShapeIndicesStore()
     const { command } = useCommandStore()
