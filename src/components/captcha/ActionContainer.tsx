@@ -6,6 +6,9 @@ import { HomeLocationChecker } from "@/hooks/HomeLocationChecker";
 import useShapeValidation from "@/hooks/UseShapeValidation";
 import { useNavigate } from "react-router-dom";
 import useSweetAlert from "../common/Sweetalert";
+import { useSelectedShapeIndicesStore } from "@/stores/shapeIndices";
+import { useAttemptStore } from "@/stores/attemptStore";
+
 
 export default function ActionContainer() {
     
@@ -13,15 +16,21 @@ export default function ActionContainer() {
   const { buttonValue, updateButton } = useButtonStore()
   const { validate } = useShapeValidation();
   const { showAlert } = useSweetAlert();
-  
+  const { updateSelectedShapeIndices } = useSelectedShapeIndicesStore()
+  const { updateNumberofAttempts, attempts } = useAttemptStore()
+
   const navigate = useNavigate();
 
-  const handleSuccess = () => {
-    navigate('/pass')
+  const handleValidationSuccess = () => {
+    updateSelectedShapeIndices([])
+    navigate('/')
   };
 
-  const handleError = () => {
-    console.log("Error function executed!");
+  const handleValidationError = () => {
+    updateSelectedShapeIndices([])
+    if(attempts===0){
+      navigate('/')
+    };
   };
 
 
@@ -32,9 +41,10 @@ export default function ActionContainer() {
     } else {
       const result = validate();
       if (result) {
-        showAlert("You Pass the validation", "Congratulations! You successfully passed.", "success", handleSuccess);
+        showAlert("You Pass the validation", "Congratulations! You successfully passed.", "success", handleValidationSuccess);
       } else {
-        showAlert("Validation error", "You have tries left", "error", handleSuccess, handleError );
+        updateNumberofAttempts( attempts-1 )
+        showAlert("Validation error", `You have ${attempts} tries left`, "error", handleValidationSuccess, handleValidationError );
       }
     }
   }; 
