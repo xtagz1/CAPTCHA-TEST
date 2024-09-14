@@ -9,6 +9,7 @@ import useSweetAlert from "../common/Sweetalert";
 import { useSelectedShapeIndicesStore } from "@/stores/shapeIndices";
 import { useAttemptStore } from "@/stores/attemptStore";
 import { GenerateRandomShapesIndices } from "@/hooks/GenerateRandomShapesIndices";
+import { GenerateRandomCommands } from "@/hooks/GenerateRandomCommands";
 
 
 export default function ActionContainer() {
@@ -20,6 +21,7 @@ export default function ActionContainer() {
   const { updateSelectedShapeIndices } = useSelectedShapeIndicesStore()
   const { updateNumberofAttempts, attempts } = useAttemptStore()
   const { generateAndUpdateIndices } = GenerateRandomShapesIndices()
+  const { generateCommands } = GenerateRandomCommands() 
   const navigate = useNavigate();
 
   const handleValidationSuccess = () => {
@@ -29,6 +31,7 @@ export default function ActionContainer() {
 
   const handleValidationError = () => {
     generateAndUpdateIndices()
+    generateCommands()
     updateSelectedShapeIndices([])
     if(attempts <= 0 ){
       navigate('/')

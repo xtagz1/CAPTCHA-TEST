@@ -26,28 +26,31 @@ export const GenerateRandomCommands = () => {
   const generateCommands = () => {
     let randomIndex;
     let newCommand;
-    let newShape
+    let newShape;
 
     // Ensure the new command is different from the last command
     do {
       randomIndex = Math.floor(Math.random() * shapes.length);
       newCommand = shapes[randomIndex]?.command;
-      newShape = shapes[randomIndex]?.shape
+      newShape = shapes[randomIndex]?.shape;
     } while (newCommand === lastCommand);
 
     // Update the last command
     setLastCommand(newCommand);
-    return { newCommand,newShape };
+
+    // Update the command store
+    update({ text: newCommand, shape: newShape });
+
+    return { newCommand, newShape };
   };
 
   useEffect(() => {
     if (buttonValue?.toContinue === true) {
-      const newObjCommand = generateCommands();
-      update({ text: newObjCommand?.newCommand, shape: newObjCommand?.newShape });
+      generateCommands(); // Automatically generate on button value change
     } else {
       update({ text: 'Take Selfie', shape: '' }); 
     }
   }, [buttonValue]);
 
-  return { command };
+  return { command, generateCommands }; // Return generateCommands
 };
