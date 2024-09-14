@@ -39,7 +39,7 @@ const CaptchaBox = memo(({}: BoxProps) => {
             onClick={() => select(index)}
             key={index}
             className={`border border-white bg-white bg-opacity-40 w-full h-full flex items-center justify-center hover:bg-sky-700 ${
-              selectedShapeIndices.includes(index) ? 'bg-gray-900' : ''
+              selectedShapeIndices.includes(index) ? 'bg-orange-500' : ''
             }`}
           >
             {shapes?.triangle?.includes(index) && <Triangle />}
