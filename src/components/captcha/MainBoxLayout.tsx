@@ -24,11 +24,11 @@ export default function MainBoxLayout() {
             <button 
                 disabled={locationIsHome} 
                 onClick={handleClick} 
-                className={`self-end mr-8 underline cursor-pointer ${
-                    locationIsHome ? 'text-gray-400 cursor-not-allowed' : 'text-blue-400'
+                className={`self-end mr-8 underline  ${
+                    locationIsHome ? 'text-gray-400 ' : 'text-blue-400 cursor-pointer'
                 }`}
                 >
-                Back to home
+                Take a selfie again
                 </button>
         </div>
     );

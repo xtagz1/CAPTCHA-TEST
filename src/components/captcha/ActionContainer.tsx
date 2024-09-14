@@ -26,16 +26,23 @@ export default function ActionContainer() {
 
   const handleValidationSuccess = () => {
     updateSelectedShapeIndices([])
-    navigate('/')
+    navigate('/asd');  //random for not found
+    setTimeout(() => {
+      navigate('/pass'); 
+    }, 150);  
   };
 
   const handleValidationError = () => {
     generateAndUpdateIndices()
     generateCommands()
     updateSelectedShapeIndices([])
-    if(attempts <= 0 ){
-      navigate('/')
-    };
+    if (attempts <= 0) {
+      navigate('/asd');  
+      setTimeout(() => {
+        navigate('/error'); 
+      }, 150);  
+    }
+    
   };
 
 

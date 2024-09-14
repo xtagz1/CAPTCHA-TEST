@@ -28,7 +28,6 @@ const useShapeValidation: UseShapeValidation = ( ) => {
 
                 return allElementsSelected;
             } else {
-                console.log('No matching shape found.');
                 return false;
             }
             }

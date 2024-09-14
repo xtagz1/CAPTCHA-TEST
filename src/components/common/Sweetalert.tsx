@@ -15,15 +15,14 @@ const useSweetAlert = () => {
             onError: () => void = () => {}
         ) => {
             // Determine the button text based on the icon and attempts
-            const buttonText = icon === 'success' ? 'Back to home' : (attempts === 0 ? 'Back to home' : 'Ok');
-
+           
             return Swal.fire({
                 position: 'top',
                 icon,
                 title,
                 text,
                 showConfirmButton: true,
-                confirmButtonText: buttonText,
+                confirmButtonText: 'ok',
                 allowOutsideClick: false, 
             }).then((result) => {
                 if (result.isConfirmed) {

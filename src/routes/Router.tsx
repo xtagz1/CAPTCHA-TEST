@@ -1,8 +1,10 @@
 import HomeIndex from "@/pages/home/HomeIndex";
 import HomeRootLayout from "@/pages/home/HomeRootLayout";
-import ValidationPass from "@/pages/pass/ValidationPass";
+import ValidationError from "@/pages/error/ValidationError";
 import ValidationPage from "@/pages/validation/ValidationPage";
 import { createBrowserRouter } from "react-router-dom";
+import NotFound from "@/pages/not-found/NotFound";
+import ValidationSucess from "@/pages/validation-success/ValidationSucess";
 
 
 export const Router = createBrowserRouter([
@@ -22,12 +24,19 @@ export const Router = createBrowserRouter([
 	{
 		path: "/pass",
 		element: (
-			<ValidationPass />
+			<ValidationSucess/>
+		),
+	},
+	{
+		path: "/error",
+		element: (
+			<ValidationError />
 		),
 	},
     {
 		path: "*",
-		element: <div>Not Found</div>,
+		element: (
+			<NotFound/>
+		),
 	}
-
 ])
