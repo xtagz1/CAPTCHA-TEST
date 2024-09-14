@@ -1,17 +1,18 @@
 import UseGenerateRandomPosition from "@/hooks/UseGenerateRandomPosition";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import Triangle from "../shapes/Triangle";
 import Square from "../shapes/Square";
 import Circle from "../shapes/Circle";
 import { GenerateRandomShapesIndices } from "@/hooks/GenerateRandomShapesIndices";
-import { useSelectedShapeIndicesStore } from "@/stores/shapeIndices";
+import { useSelectedShapeIndicesStore, useShapeIndicesStore } from "@/stores/shapeIndices";
 
 interface BoxProps {}
 
 const CaptchaBox = memo(({}: BoxProps) => {
   const { box, buttonValue } = UseGenerateRandomPosition(); 
-  const  {triangleIndices, squareIndices, circleIndices} = GenerateRandomShapesIndices()
   const { selectedShapeIndices, updateSelectedShapeIndices } = useSelectedShapeIndicesStore()
+  const { shapes } = useShapeIndicesStore()
+  const { generateAndUpdateIndices } = GenerateRandomShapesIndices()
 
   const select = (index: number) => {
     if (selectedShapeIndices.includes(index)) {
@@ -23,6 +24,9 @@ const CaptchaBox = memo(({}: BoxProps) => {
     }
   };
 
+  useEffect(() => {
+    generateAndUpdateIndices()
+}, []);
 
   return (
     <div
@@ -35,12 +39,12 @@ const CaptchaBox = memo(({}: BoxProps) => {
             onClick={() => select(index)}
             key={index}
             className={`border border-white bg-white bg-opacity-40 w-full h-full flex items-center justify-center hover:bg-sky-700 ${
-              selectedShapeIndices.includes(index) ? 'bg-black' : ''
+              selectedShapeIndices.includes(index) ? 'bg-gray-900' : ''
             }`}
           >
-            {triangleIndices.includes(index) && <Triangle />}
-            {squareIndices.includes(index) && <Square />}
-            {circleIndices.includes(index) && <Circle />}
+            {shapes?.triangle?.includes(index) && <Triangle />}
+            {shapes?.square?.includes(index) && <Square />}
+            {shapes?.circle?.includes(index) && <Circle />}
           </div>
         ))}
     </div>

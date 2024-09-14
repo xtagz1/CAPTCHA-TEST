@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import useSweetAlert from "../common/Sweetalert";
 import { useSelectedShapeIndicesStore } from "@/stores/shapeIndices";
 import { useAttemptStore } from "@/stores/attemptStore";
+import { GenerateRandomShapesIndices } from "@/hooks/GenerateRandomShapesIndices";
 
 
 export default function ActionContainer() {
@@ -18,7 +19,7 @@ export default function ActionContainer() {
   const { showAlert } = useSweetAlert();
   const { updateSelectedShapeIndices } = useSelectedShapeIndicesStore()
   const { updateNumberofAttempts, attempts } = useAttemptStore()
-
+  const { generateAndUpdateIndices } = GenerateRandomShapesIndices()
   const navigate = useNavigate();
 
   const handleValidationSuccess = () => {
@@ -27,8 +28,9 @@ export default function ActionContainer() {
   };
 
   const handleValidationError = () => {
+    generateAndUpdateIndices()
     updateSelectedShapeIndices([])
-    if(attempts===0){
+    if(attempts <= 0 ){
       navigate('/')
     };
   };
@@ -44,7 +46,14 @@ export default function ActionContainer() {
         showAlert("You Pass the validation", "Congratulations! You successfully passed.", "success", handleValidationSuccess);
       } else {
         updateNumberofAttempts( attempts-1 )
-        showAlert("Validation error", `You have ${attempts} tries left`, "error", handleValidationSuccess, handleValidationError );
+        showAlert(
+          "Validation error",
+          `You have ${attempts} ${attempts === 1 ? 'try' : 'tries'} left`, 
+          "error",
+          handleValidationSuccess,
+          handleValidationError
+        );
+        
       }
     }
   }; 
