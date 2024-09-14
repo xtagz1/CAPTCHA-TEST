@@ -1,10 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-interface ButtonValue {
-  toContinue: boolean;
-  text: string;
-}
+import { ButtonValue } from "@/interface/captcha";
 
 interface ButtonStore {
   buttonValue: ButtonValue;

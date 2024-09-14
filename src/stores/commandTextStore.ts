@@ -1,10 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-interface Command {
-  text: string;
-  shape: string
-}
+import { Command } from "@/interface/captcha";
 
 
 interface CommandStore {
